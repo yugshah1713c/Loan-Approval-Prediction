@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="title">
+                <h1>🏦 Loan Approval Prediction</h1>
+                <p>Fill in the details below to predict loan approval.</p>
+            </div>
+
+            <form action="/predict" method="POST">
+
+                <div class="input-box">
+                    <label>Age</label>
+                    <input type="number" name="age" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Annual Income</label>
+                    <input type="number" name="income" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Loan Amount</label>
+                    <input type="number" name="Loan_amount" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Interest Rate (%)</label>
+                    <input type="number" name="int_rate" step="any" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Loan Percent Income</label>
+                    <input type="number" name="percent_amount" step="any" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Credit History Length</label>
+                    <input type="number" name="person_cred_hist_length" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Credit Score</label>
+                    <input type="number" name="credit_score" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Education</label>
+
+                    <select name="person_education" required>
+                        <option value="Associate">Associate</option>
+                        <option value="Bachelor">Bachelor</option>
+                        <option value="Doctorate">Doctorate</option>
+                        <option value="High School">High School</option>
+                        <option value="Master">Master</option>
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Home Ownership</label>
+
+                    <select name="home_ownership" required>
+                        <option value="OWN">Own</option>
+                        <option value="RENT">Rent</option>
+                        <option value="MORTGAGE">Mortgage</option>
+                        <option value="OTHER">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Loan Purpose</label>
+
+                    <select name="loan_intent" required>
+                        <option value="EDUCATION">Education</option>
+                        <option value="HOMEIMPROVEMENT">Home Improvement</option>
+                        <option value="MEDICAL">Medical</option>
+                        <option value="PERSONAL">Personal</option>
+                        <option value="VENTURE">Venture</option>
+                        <option value="DEBTCONSOLIDATION">Debt Consolidation</option>
+                    </select>
+                </div>
+
+                <div class="radio-section">
+
+                    <label class="radio-title">
+                        Previous Loan Defaults
+                    </label>
+
+                    <div class="radio-group">
+
+                        <label class="radio-option">
+                            <input type="radio"
+                                   name="previous_loan_defaults"
+                                   value="Yes"
+                                   required>
+                            Yes
+                        </label>
+
+                        <label class="radio-option">
+                            <input type="radio"
+                                   name="previous_loan_defaults"
+                                   value="No">
+                            No
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                    <button class="predict-btn" type="submit">
+                        Predict Loan Status
+                    </button>
+
+                    <button class="reset-btn" type="reset">
+                        Reset
+                    </button>
+
+                </div>
+
+            </form>
+
+
+
+            <div class="prediction-box">
+
+                <h2>Prediction Result</h2>
+
+                <div class="prediction-result">
+                    {{ prediction }}
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
