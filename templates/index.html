@@ -23,48 +23,84 @@
             <form action="/predict" method="POST">
 
                 <div class="input-box">
-                    <label>Age</label>
-                    <input type="number" name="age" required>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                          Age
+                          <span style="color:#007BFF; cursor:pointer;"
+                            title="Enter your current age in years.">ⓘ</span>
+                    </label>
+                     <input type="number" name="age" required>
                 </div>
 
                 <div class="input-box">
-                    <label>Name</label>
-                    <input type="text" name="person_name" id="person_name">
+                        <label style="display:flex; align-items:center; gap:5px;">
+                            Name
+                            <span style="color:#007BFF; cursor:pointer;"
+                            title="Enter your full name.">ⓘ</span>
+                         </label>
+                        <input type="text" name="person_name" id="person_name" required>
                 </div>
 
                 <div class="input-box">
-                    <label>Annual Income</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Annual Income
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Enter your yearly income before taxes.">ⓘ</span>
+                    </label>
                     <input type="number" name="income" required>
                 </div>
 
                 <div class="input-box">
-                    <label>Loan Amount</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Loan Amount
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Enter the total amount of loan you want.">ⓘ</span>
+                    </label>
                     <input type="number" name="Loan_amount" required>
                 </div>
 
                 <div class="input-box">
-                    <label>Interest Rate (%)</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Interest Rate (%)
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Annual interest rate offered for the loan.">ⓘ</span>
+                    </label>
                     <input type="number" name="int_rate" step="any" required>
                 </div>
 
+
                 <div class="input-box">
-                    <label>Loan Percent Income</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Loan Percent Income
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Loan Amount ÷ Annual Income. Example: ₹2,00,000 / ₹10,00,000 = 0.20">ⓘ</span>
+                    </label>
                     <input type="number" name="percent_amount" step="any" required>
                 </div>
 
                 <div class="input-box">
-                    <label>Credit History Length</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Credit History Length
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Number of years since your first credit account was opened.">ⓘ</span>
+                    </label>
                     <input type="number" name="person_cred_hist_length" required>
                 </div>
 
                 <div class="input-box">
-                    <label>Credit Score</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Credit Score
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Usually between 300 and 850. Higher scores improve approval chances.">ⓘ</span>
+                    </label>
                     <input type="number" name="credit_score" required>
                 </div>
 
-                <div class="input-box">
-                    <label>Education</label>
-
+                <div>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Education
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Select your highest completed education level.">ⓘ</span>
+                    </label>
                     <select name="person_education" required>
                         <option value="Associate">Associate</option>
                         <option value="Bachelor">Bachelor</option>
@@ -75,7 +111,11 @@
                 </div>
 
                 <div class="input-box">
-                    <label>Home Ownership</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Home Ownership
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Choose whether you own, rent, or have a mortgage.">ⓘ</span>
+                    </label>
 
                     <select name="home_ownership" required>
                         <option value="OWN">Own</option>
@@ -86,7 +126,11 @@
                 </div>
 
                 <div class="input-box">
-                    <label>Loan Purpose</label>
+                    <label style="display:flex; align-items:center; gap:5px;">
+                        Loan Purpose
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Select the main reason for applying for the loan.">ⓘ</span>
+                    </label>
 
                     <select name="loan_intent" required>
                         <option value="EDUCATION">Education</option>
@@ -104,24 +148,32 @@
                         Previous Loan Defaults
                     </label>
 
-                    <div class="radio-group">
+                <div class="radio-group">
 
-                        <label class="radio-option">
-                            <input type="radio"
-                                   name="previous_loan_defaults"
-                                   value="Yes"
-                                   required>
-                            Yes
-                        </label>
+                    <label class="radio-title" style="display:flex; align-items:center; gap:5px;">
+                        Previous Loan Defaults
+                        <span style="color:#007BFF; cursor:pointer;"
+                            title="Choose 'Yes' if you have previously failed to repay a loan.">
+                            ⓘ
+                        </span>
+                    </label>
 
-                        <label class="radio-option">
-                            <input type="radio"
-                                   name="previous_loan_defaults"
-                                   value="No">
-                            No
-                        </label>
+                    <label class="radio-option">
+                        <input type="radio"
+                            name="previous_loan_defaults"
+                            value="Yes"
+                            required>
+                        Yes
+                    </label>
 
-                    </div>
+                    <label class="radio-option">
+                        <input type="radio"
+                            name="previous_loan_defaults"
+                            value="No">
+                        No
+                    </label>
+
+                </div>
 
                 </div>
 
