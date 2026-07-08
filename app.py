@@ -31,6 +31,7 @@ def home():
 def predict():
     print("predict route called")
     person_age = int(request.form['age'])
+    person_name = request.form['person_name']
     person_income = float(request.form['income'])
     loan_amount = float(request.form['Loan_amount'])
     interest_rate = float(request.form['int_rate'])
@@ -99,6 +100,7 @@ def predict():
     query = """
     INSERT INTO loan_predictions(
     person_age,
+    person_name,
     person_income,
     loan_amount,
     interest_rate,
@@ -111,11 +113,12 @@ def predict():
     loan_intent,
     prediction
     )
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
 
     values = (
     person_age,
+    person_name,
     person_income,
     loan_amount,
     interest_rate,
