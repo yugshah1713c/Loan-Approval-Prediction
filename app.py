@@ -1,17 +1,20 @@
 from flask import Flask,render_template,request
 import joblib
 import pandas as pd
-import mysql.   connector
+import mysql.connector
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+load_dotenv()
 
 ## Database connection
 db = mysql.connector.connect(
-    host="hayabusa.proxy.rlwy.net",
-    user="root",
-    password="TgIrGWeBMXfxeptIITNvXQZboqfhDwuO",
-    database="railway",
-    port=49954
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    port=int(os.getenv("DB_PORT"))
 )
 
 cursor = db.cursor()
@@ -93,7 +96,44 @@ def predict():
     else :
         result = "Loan Rejected ❌"
 
+    query = """
+    INSERT INTO loan_predictions(
+    person_age,
+    person_income,
+    loan_amount,
+    interest_rate,
+    loan_percent_income,
+    credit_history,
+    credit_score,
+    previous_loan_defaults,
+    person_education,
+    home_ownership,
+    loan_intent,
+    prediction
+    )
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """
+
+    values = (
+    person_age,
+    person_income,
+    loan_amount,
+    interest_rate,
+    loan_percent_amount,
+    credit_history,
+    credit_score,
+    "Yes" if previous_loan_defaults == 1 else "No",
+    person_education,
+    person_home_ownership,
+    loan_intent,
+    result
+    )
+
+    cursor.execute(query, values)
+    db.commit()
+
     return render_template("index.html",prediction=result)
+
 
 
 if __name__ == "__main__":
