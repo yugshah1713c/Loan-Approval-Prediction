@@ -1,8 +1,20 @@
 from flask import Flask,render_template,request
 import joblib
 import pandas as pd
+import mysql.   connector
 
 app = Flask(__name__)
+
+## Database connection
+db = mysql.connector.connect(
+    host="hayabusa.proxy.rlwy.net",
+    user="root",
+    password="TgIrGWeBMXfxeptIITNvXQZboqfhDwuO",
+    database="railway",
+    port=49954
+)
+
+cursor = db.cursor()
 
 model = joblib.load("models/random_forest.pkl")
 scaler = joblib.load("models/scaler.pkl")
@@ -82,5 +94,7 @@ def predict():
         result = "Loan Rejected ❌"
 
     return render_template("index.html",prediction=result)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
