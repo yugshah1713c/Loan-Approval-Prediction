@@ -126,7 +126,7 @@
                             title="Choose whether you own, rent, or have a mortgage.">ⓘ</span>
                     </label>
 
-                    <select name="home_ownership" required>
+                    <select name="home_ownership" id="ownership" required>
                         <option value="" selected disabled>Select Ownership</option>
                         <option value="OWN">Own</option>
                         <option value="RENT">Rent</option>
@@ -142,7 +142,7 @@
                             title="Select the main reason for applying for the loan.">ⓘ</span>
                     </label>
 
-                    <select name="loan_intent" required>
+                    <select name="loan_intent" id="loan_intent" required>
                         <option value="" selected disabled>Select Loan Intent</option>
                         <option value="EDUCATION">Education</option>
                         <option value="HOMEIMPROVEMENT">Home Improvement</option>
@@ -153,40 +153,38 @@
                     </select>
                 </div>
 
-                <div class="radio-section">
+<div class="input-box">
 
-                    <label class="radio-title">
-                        Previous Loan Defaults
-                    </label>
+    <label style="display:flex; align-items:center; gap:5px;">
+        Previous Loan Defaults
+        <span style="color:#007BFF; cursor:pointer;"
+              title="Choose 'Yes' if you have previously failed to repay a loan.">
+            ⓘ
+        </span>
+    </label>
 
-                <div class="radio-group">
+    <div class="radio-group">
 
-                    <label class="radio-title" style="display:flex; align-items:center; gap:5px;">
-                        Previous Loan Defaults
-                        <span style="color:#007BFF; cursor:pointer;"
-                            title="Choose 'Yes' if you have previously failed to repay a loan.">
-                            ⓘ
-                        </span>
-                    </label>
+        <label class="radio-option">
+            <input type="radio"
+                   name="previous_loan_defaults"
+                   value="Yes"
+                   required>
+            Yes
+        </label>
 
-                    <label class="radio-option">
-                        <input type="radio"
-                            name="previous_loan_defaults"
-                            value="Yes"
-                            required>
-                        Yes
-                    </label>
+        <label class="radio-option">
+            <input type="radio"
+                   name="previous_loan_defaults"
+                   value="No">
+            No
+        </label>
 
-                    <label class="radio-option">
-                        <input type="radio"
-                            name="previous_loan_defaults"
-                            value="No">
-                        No
-                    </label>
+    </div>
 
-                </div>
+    <small id="defaultError"></small>
 
-                </div>
+</div>
 
                 <div class="buttons">
 
