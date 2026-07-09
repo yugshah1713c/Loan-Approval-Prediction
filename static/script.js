@@ -22,7 +22,7 @@ const credit_historyError = document.querySelector("#credit_historyError")
 const credit_score = document.querySelector("#credit_score")
 const credit_scoreError = document.querySelector("#credit_scoreError")
 
-age.addEventListener("input", function () {
+age.addEventListener("input",  () => {
     if(age.value <18 || age.value > 100)
     {
         ageError.textContent = "❌ Age must be between 18 and 100.";
@@ -31,9 +31,17 @@ age.addEventListener("input", function () {
     }
 });
 
-// name.addEventListener("input",() => {
-//     if(name.)
-// })
+name.addEventListener("input", () => {
+
+    const nameLength = name.value.trim().length;
+
+    if (nameLength < 3 || nameLength > 50) {
+        nameError.textContent = "❌ Name must be 3–50 characters.";
+    } else {
+        nameError.textContent = "";
+    }
+
+});
 
 income.addEventListener("input",() => {
     if(income.value <= 0)
