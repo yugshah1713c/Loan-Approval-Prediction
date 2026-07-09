@@ -31,7 +31,7 @@ def home():
 def predict():
     print("predict route called")
     person_age = int(request.form['age'])
-    person_name = request.form['person_name']
+    person_name = request.form['person_name'].strip()
     person_income = float(request.form['income'])
     loan_amount = float(request.form['Loan_amount'])
     interest_rate = float(request.form['int_rate'])
@@ -44,6 +44,81 @@ def predict():
     person_home_ownership = request.form['home_ownership']
     loan_intent = request.form['loan_intent']
 
+    # ----------Validation----------
+
+    if person_age < 18 or person_age > 100 :
+        return render_template(
+            "index.html",
+            prediction = "❌ Age must be between 18 and 100."
+        )
+    
+    if len(person_name) < 3 or len(person_name) > 50:
+        return render_template(
+            "index.html",
+            prediction = "❌ Name must be 3–50 characters."
+        )
+    
+    if person_income <= 0 :
+        return render_template(
+            "index.html",
+            prediction = "❌ Income must be greater than 0."
+        )
+    
+    if loan_amount <= 0 :
+        return render_template(
+            "index.html",
+            prediction = "❌ Enter a valid loan amount."
+        )
+
+    if interest_rate < 0 or interest_rate > 50 :
+        return render_template(
+            "index.html",
+            prediction = "❌ Interest rate must be between 0% and 50%."
+        )
+    
+    if loan_percent_amount < 0 or loan_percent_amount > 1:
+       return render_template(
+        "index.html",
+        prediction="❌ Loan percent income must be between 0 and 1."
+    )
+
+    if credit_history <= 0 :
+        return render_template(
+            "index.html",
+            prediction = "❌ Enter a valid credit history length."
+        )
+    
+    if credit_score < 300 or credit_score >850 :
+        return render_template(
+            "index.html",
+            prediction = "❌ Credit score must be between 300 and 850."
+        )
+    
+    if person_education == "" :
+        return render_template(
+            "index.html",
+            prediction = "❌ Please select your education."
+        )
+    
+    if person_home_ownership == "" :
+        return render_template(
+            "index.html",
+            prediction = "❌ Please select your ownership."
+        )
+    
+    if loan_intent == "" :
+        return render_template(
+            "index.html",
+            prediction = "❌ Please select your loan intent."
+        )
+    
+    if previous_loan_defaults not in ["Yes" , "No"] :
+        return render_template(
+            "index.html",
+            prediction="❌ Please choose Yes or No."
+        )
+
+    # ----------Preprocessing----------
     data = {
     "person_age": person_age,
     "person_income": person_income,
@@ -139,5 +214,5 @@ def predict():
 
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+app.run(debug=True)
