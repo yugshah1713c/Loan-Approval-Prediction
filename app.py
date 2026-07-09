@@ -169,8 +169,12 @@ def predict():
     prediction = model.predict(df)
     if prediction[0] == 1:
         result = "Loan Approved ✅"
+        probability = round(model.predict_proba(df)[0][1] * 100,2)
     else :
         result = "Loan Rejected ❌"
+        probability = round(model.predict_proba(df)[0][1] * 100,2)
+
+# --------------------Database Query--------------------
 
     query = """
     INSERT INTO loan_predictions(
@@ -210,7 +214,7 @@ def predict():
     cursor.execute(query, values)
     db.commit()
 
-    return render_template("index.html",prediction=result)
+    return render_template("index.html",prediction=result,person_name = person_name,probability = probability)
 
     
 

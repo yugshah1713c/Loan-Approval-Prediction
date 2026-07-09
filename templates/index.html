@@ -200,15 +200,26 @@
 
             </form>
 
-
+<!-- ------------------------Prediction--------------------- -->
 
             <div class="prediction-box">
 
                 <h2>Prediction Result</h2>
 
-                <div class="prediction-result">
-                    {{ prediction }}
-                </div>
+                {% if prediction %}
+                    <div class="prediction-result">
+                        {% if prediction == "Loan Approved ✅" %}
+                        <h3>Loan Approved ✅</h3>
+                        <p>Congrance {{person_name}}</p>
+                        <p>Approval chances {{probability}}</p>
+
+                        {% else %}
+                        <h3>"Loan Rejected ❌"</h3>
+                        <p>Sorry {{person_name}}</p>
+                        <p>Approval chances {{probability}}</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
 
             </div>
 
