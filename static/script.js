@@ -44,14 +44,14 @@ income.addEventListener("input",() => {
     }
 })
 
-// loan_amt.addEventListener("input",() =>{
-//     if(income.value <= 0)
-//     {
-//         loan_amtError.textContent = "❌ Income must be greater than 0."
-//     }else{
-//         loan_amtError.textContent = ""
-//     }
-// })
+loan_amt.addEventListener("input",() =>{
+    if(loan_amt.value <= 0)
+    {
+        loan_amtError.textContent = "❌ Income must be greater than 0."
+    }else{
+        loan_amtError.textContent = ""
+    }
+})
 
 int_rate.addEventListener("input",() => {
     if(int_rate.value <= 0 || int_rate.value > 50)
