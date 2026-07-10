@@ -72,17 +72,6 @@
                     <small id="int_rateError"></small>
                 </div>
 
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Loan Percent Income
-                        <span style="color:#007BFF; cursor:pointer;"
-                            title="Loan Amount ÷ Annual Income. Example: ₹2,00,000 / ₹10,00,000 = 0.20">ⓘ</span>
-                    </label>
-                    <input type="number" name="percent_amount" step="any" id="loan_per_inc" required>
-                    <small id="loan_per_incError"></small>
-                </div>
-
                 <div class="input-box">
                     <label style="display:flex; align-items:center; gap:5px;">
                         Credit History Length
@@ -182,7 +171,6 @@
 
     </div>
 
-    <small id="defaultError"></small>
 
 </div>
 
@@ -212,11 +200,24 @@
                         <h3>Loan Approved ✅</h3>
                         <p>🎉🎊Crongratulations {{person_name}}</p>
                         <p>Approval chances {{probability}}%</p>
-
+                        <p>Main reasons are :</p>
+                        <p>{{features[0]}} : {{message[0]}}</p>
+                        <br>
+                        <p>{{features[1]}} : {{message[1]}}</p>
+                        <br>
+                        <p>{{features[2]}} : {{message[2]}}</p>
+                        
+                    
                         {% else %}
                         <h3>"Loan Rejected ❌"</h3>
                         <p>😕Sorry {{person_name}}</p>
                         <p>Approval chances {{probability}}%</p>
+                        <p>Main reasons are :</p>
+                        <p>{{features[0]}} : {{message[0]}}</p>
+                        <br>
+                        <p>{{features[1]}} : {{message[1]}}</p>
+                        <br>
+                        <p>{{features[2]}} : {{message[2]}}</p>
                         {% endif %}
                     </div>
                 {% endif %}
