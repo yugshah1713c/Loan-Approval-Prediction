@@ -146,7 +146,7 @@ window.addEventListener("load",() => {
     {
         predictionResult.scrollIntoView({
             behavior : "smooth",
-            block : "center"
+            block : "start"
         })
         
         setTimeout( () => {
