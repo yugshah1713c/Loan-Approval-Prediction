@@ -231,125 +231,125 @@ def predict():
     for f,s in zip(features,score) :
         if f == "Person Age" :
             if s < 0 :
-                message.append("Your age has negative impact")
+                message.append("Your age had a slight negative impact on this loan application.")
             else :
-                message.append("Your age has positively impact")
+                message.append("Your age falls within a favorable range for this loan application.t")
             
         elif f == "Person Income":
             if s < 0 :
-                message.append(f"Your  income is {person_income:,.0f}, which negatively influenced this prediction")
+                message.append(f"Your annual income of ₹{person_income} is lower than ideal, which reduced your approval chances.")
             else :
-                message.append(f"Your income is {person_income:,.0f}, which positively influenced this prediction")
+                message.append(f"Your annual income of ₹{person_income} strengthens your loan approval chances.")
             
         elif f == "Loan Amount" :
             if s < 0 :
-                message.append(f"Your loan amount is {loan_amount:,.0f}, which negatively influenced this prediction")
+                message.append(f"Your requested loan amount is relatively high, which reduced your approval chances.")
             else :
-                message.append(f"Your loan amount is {loan_amount:,0f}, which positevely influenced this prediction")
+                message.append(f"Your requested loan amount is considered manageable based on your financial profile.")
         
         elif f == "Interest Rate" :
             if s < 0 :
-                message.append(f"Your interest rate is {interest_rate}, which negatively influenced this prediction")
+                message.append(f"Your interest rate of {interest_rate}%, had a negative impact on the approval decision.")
             else :
-                message.append(f"Your interest rate is {interest_rate}, which positively influenced this prediction")
+                message.append(f"Your interest rate of {interest_rate}%. supports a favorable approval decision.")
 
         elif f == "Loan-Income Ratio" :
             ratio = loan_amount / person_income * 100
             if s < 0 :
-                message.append(f"The requested loan amount is {ratio:,.0f}% of your annual income, which negatively influenced this prediction.")
+                message.append(f"Your requested loan is {loan_percent_amount}% of your annual income, indicating a high repayment burden.")
             else :
-                message.append(f"The requested loan amount is {ratio:,.0f}% of your annual income, which positively influenced this prediction.")
+                message.append(f"Your requested loan is only {loan_percent_amount}% of your annual income, indicating a healthy repayment capacity.")
 
         elif f == "Credit History" :
             if s < 0 :
-                message.append(f"Your credit history is {credit_history}, which negatively influenced this prediction.")
+                message.append(f"Your credit history of {credit_history} years is relatively short, which reduced your approval chances.")
             else :
-                message.append(f"The credit history is {credit_history}, which negatively influenced this prediction.")
+                message.append(f"Your credit history of {credit_history} years demonstrates stable borrowing experience.")
 
         elif f == "Credit Score" :
             if s < 0 :
-                message.append(f"Your credit score is {credit_score}, which negatively influenced this prediction.")
+                message.append(f"Your credit score of {credit_score} reduced your approval chances.")
             else :
-                message.append(f"The credit score is {credit_score}, which positively influenced this prediction.")
+                message.append(f"Your credit score of {credit_score} significantly improved your approval chances.")
 
         elif f == "Previous Loan Defaults" :
             if s < 0 :
-                message.append(f"Your Previous Loan Defaults is {previous_loan_defaults}, which negatively influenced this prediction.")
+                message.append(f"Your previous loan default history significantly reduced your approval chances.")
             else :
-                message.append(f"The Previous Loan Defaults is {previous_loan_defaults}, which positively influenced this prediction.")
+                message.append(f"Your clean repayment history improved your loan approval chances.")
             
         elif f =="Education (Bachelor's)" :
             if s < 0 :
-                message.append(f"Your education is {person_education}, which negatively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
             else :
-                message.append(f"The education is {person_education}, which positively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
 
         elif f =="Education (Master's)" :
             if s < 0 :
-                message.append(f"Your education is {person_education}, which negatively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
             else :
-                message.append(f"The education is {person_education}, which positively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
 
         elif f =="Education (Doctorate)" :
             if s < 0 :
-                message.append(f"Your education is {person_education}, which negatively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
             else :
-                message.append(f"The education is {person_education}, which positively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
 
         elif f =="Education (High School)" :
             if s < 0 :
-                message.append(f"Your education is {person_education}, which negatively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
             else :
-                message.append(f"The education is {person_education}, which positively influenced this prediction.")
+                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
             
         elif f == "Ownership (Own)" :
             if s < 0 :
-                message.append(f"Your ownership is {person_home_ownership}, which negatively influenced this prediction.")
+                message.append(f"Your home ownership status ({person_home_ownership}) slightly reduced your approval chances.")
             else :
-                message.append(f"The ownership is {person_home_ownership}, which positively influenced this prediction.")
+                message.append(f"Your home ownership status ({person_home_ownership}) contributed positively to your loan application.")
                 
         elif f == "Ownership (Rent)" :
             if s < 0 :
-                message.append(f"Your ownership is {person_home_ownership}, which negatively influenced this prediction.")
+                message.append(f"Your home ownership status ({person_home_ownership}) slightly reduced your approval chances.")
             else :
-                message.append(f"The ownership is {person_home_ownership}, which positively influenced this prediction.")
+                message.append(f"Your home ownership status ({person_home_ownership}) contributed positively to your loan application.")
 
 
         elif f == "Ownership (Other)" :
             if s < 0 :
-                message.append(f"Your ownership is {person_home_ownership}, which negatively influenced this prediction.")
+                message.append(f"Your home ownership status ({person_home_ownership}) slightly reduced your approval chances.")
             else :
-                message.append(f"The ownership is {person_home_ownership}, which positively influenced this prediction.")
+                message.append(f"Your home ownership status ({person_home_ownership}) contributed positively to your loan application.")
 
         elif f == "Intent (Education)" :
             if s < 0 :
-                message.append(f"Your intent is {loan_intent}, which negatively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
             else :
-                message.append(f"The intent is {loan_intent}, which positively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
         
         elif f == "Intent (Home Improvement)" :
             if s < 0 :
-                message.append(f"Your intent is {loan_intent}, which negatively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
             else :
-                message.append(f"The intent is {loan_intent}, which positively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
 
         elif f == "Intent (Medical)" :
             if s < 0 :
-                message.append(f"Your intent is {loan_intent}, which negatively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
             else :
-                message.append(f"The intent is {loan_intent}, which positively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
 
         elif f == "Intent (Personal)" :
             if s < 0 :
-                message.append(f"Your intent is {loan_intent}, which negatively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
             else :
-                message.append(f"The intent is {loan_intent}, which positively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
 
         elif f == "Intent (Venture)" :
             if s < 0 :
-                message.append(f"Your intent is {loan_intent}, which negatively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
             else :
-                message.append(f"The intent is {loan_intent}, which positively influenced this prediction.")
+                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
 
 
 
