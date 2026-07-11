@@ -13,9 +13,6 @@ const loan_amtError = document.querySelector("#loan_amtError")
 const int_rate = document.querySelector("#int_rate")
 const int_rateError = document.querySelector("#int_rateError")
 
-const loan_per_inc = document.querySelector("#loan_per_inc")
-const loan_per_incError = document.querySelector("#loan_per_incError")
-
 const credit_history = document.querySelector("#credit_history")
 const credit_historyError = document.querySelector("#credit_historyError")
 
@@ -25,6 +22,11 @@ const credit_scoreError = document.querySelector("#credit_scoreError")
 const education = document.querySelector("#education")
 const ownership = document.querySelector("#ownership")
 const loan_intent = document.querySelector("#loan_intent")
+
+const predictionForm = document.querySelector("#pred-form")
+const button = document.querySelector("#predictionBtn")
+const btnText = document.querySelector("#btntext")
+const spinner = document.querySelector("#spinner")
 
 age.addEventListener("input",  () => {
     if(age.value <18 || age.value > 100)
@@ -84,17 +86,6 @@ int_rate.addEventListener("input",() => {
     }
 })
 
-loan_per_inc.addEventListener("input",() => {
-    if(loan_per_inc.value <= 0 || loan_per_inc.value > 1)
-    {
-        loan_per_inc.style.border = "2px solid red";
-        loan_per_incError.textContent = "❌ Loan percent income must be between 0 and 1."
-    }else{
-        loan_per_inc.style.border = "2px solid lightgreen";
-        loan_per_incError.textContent = ""
-    }
-})
-
 credit_history.addEventListener("input",() => {
     if(credit_history.value < 0){
         credit_history.style.border = "2px solid red";
@@ -135,4 +126,14 @@ loan_intent.addEventListener("change",() => {
     {
         loan_intent.style.border = "2px solid lightgreen"
     }
+})
+
+
+predictionForm.addEventListener("submit",() => {
+    button.disabled = true
+
+    btnText.textContent = "Predicting..."
+    
+    spinner.classList.remove("spin-hidden")
+    spinner.classList.add("spin")
 })

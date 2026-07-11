@@ -20,7 +20,7 @@
                 <p>Fill in the details below to predict loan approval.</p>
             </div>
 
-            <form action="/predict" method="POST">
+            <form action="/predict" method="POST" id="pred-form">
 
                 <div class="input-box">
                     <label style="display:flex; align-items:center; gap:5px;">
@@ -176,10 +176,18 @@
 
                 <div class="buttons">
 
-                    <button class="predict-btn" type="submit">
-                        Predict Loan Status
-                    </button>
+                    <button class="predict-btn" type="submit" id="predictionBtn">
+                        
+                        <span id="btntext">
+                            Predict Loan Status
+                        </span>
+                        
+                        <span id="spinner" class="spin-hidden">
+                            ⌛
+                        </span>
 
+                  </button>
+                    
                     <button class="reset-btn" type="reset">
                         Reset
                     </button>

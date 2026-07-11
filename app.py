@@ -132,8 +132,8 @@ def predict():
 
     df = pd.DataFrame([data])
 
-    previous_loan_defaults = 1 if previous_loan_defaults == "Yes" else 0
-    df['previous_loan_defaults_on_file'] = previous_loan_defaults
+    previous_loan_defaults_encoded = 1 if previous_loan_defaults == "Yes" else 0
+    df['previous_loan_defaults_on_file'] = previous_loan_defaults_encoded
 
     categorical_cols = [
     "person_education",
@@ -274,10 +274,8 @@ def predict():
 
         elif f == "Previous Loan Defaults" :
             if s < 0 :
-                previous_loan_defaults = "Yes"
                 message.append(f"Your Previous Loan Defaults is {previous_loan_defaults}, which negatively influenced this prediction.")
             else :
-                previous_loan_defaults = "No"
                 message.append(f"The Previous Loan Defaults is {previous_loan_defaults}, which positively influenced this prediction.")
             
         elif f =="Education (Bachelor's)" :
