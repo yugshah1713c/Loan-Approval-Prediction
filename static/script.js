@@ -28,6 +28,7 @@ const button = document.querySelector("#predictionBtn")
 const btnText = document.querySelector("#btntext")
 const spinner = document.querySelector("#spinner")
 
+
 age.addEventListener("input",  () => {
     if(age.value <18 || age.value > 100)
     {
@@ -136,4 +137,20 @@ predictionForm.addEventListener("submit",() => {
     
     spinner.classList.remove("spin-hidden")
     spinner.classList.add("spin")
+
+})
+
+window.addEventListener("load",() => {
+    const predictionResult = document.querySelector("#prediction_result")
+    if(predictionResult)
+    {
+        predictionResult.scrollIntoView({
+            behavior : "smooth",
+            block : "center"
+        })
+        
+        setTimeout( () => {
+            predictionResult.classList.add("card-animate")
+        })
+    }
 })
