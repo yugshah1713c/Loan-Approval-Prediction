@@ -185,7 +185,7 @@ def predict():
     else :
         result = "Loan Rejected ❌"
         probability = round(model.predict_proba(df)[0][1] * 100,2)
-        shap_values = shap_values.values[0][:,0]
+        shap_values = shap_values.values[0][:,1]
         shap_values_df = pd.DataFrame({
             "Features" : df.columns,
             "SHAP" : shap_values
