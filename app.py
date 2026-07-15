@@ -230,14 +230,10 @@ def predict():
         'loan_intent_PERSONAL' : 'Intent',
         'loan_intent_VENTURE' : 'Intent'
     }
-    print("Original Features:", features)
-    print("Scores:", score)
     features = [features_name[f] for f in features]
-    print("Mapped Features:", features)
     message = []
     
     for f,s in zip(features,score) :
-        print(f"{f} ---> {s}")
         if f == "Person Age" :
             if s < 0 :
                 message.append("Your age had a slight negative impact on this loan application.")
@@ -281,23 +277,14 @@ def predict():
             else :
                 message.append(f"Your clean repayment history improved your loan approval chances.")
             
-        elif f =="Education" :
-            if s < 0 :
-                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
-            else :
-                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
+        elif f == "Education":
+            message.append(f"Your education level ({person_education}) was one of the factors considered by the model for this prediction.")
             
-        elif f == "Ownership" :
-            if s < 0 :
-                message.append(f"Your home ownership status ({person_home_ownership}) slightly reduced your approval chances.")
-            else :
-                message.append(f"Your home ownership status ({person_home_ownership}) contributed positively to your loan application.")
+        elif f == "Ownership":
+           message.append(f"Your home ownership status ({person_home_ownership}) was one of the factors considered by the model for this prediction.")
                 
-        elif f == "Intent" :
-            if s < 0 :
-                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
-            else :
-                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
+        elif f == "Intent":
+            message.append(f"The purpose of your loan ({loan_intent}) was one of the factors considered by the model for this prediction.")
         
 
 
@@ -340,12 +327,12 @@ def predict():
     result
     )
 
-    cursor.execute(query, values)
+    cursor.execute(query, values) 
     db.commit()
 
     return render_template("index.html",prediction=result,person_name = person_name,probability = probability,features = features,scores=score * 100,message = message)
-
+ 
     
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
