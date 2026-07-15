@@ -179,7 +179,7 @@ def predict():
             ascending=False
         )
         shap_values_df = shap_values_df[
-            shap_values_df["Features"] != "'loan_int_rate'"
+            shap_values_df["Features"] != "loan_int_rate"
         ]
         high_influence = shap_values_df.head(3)
         features = high_influence['Features'].tolist()
@@ -199,7 +199,7 @@ def predict():
             ascending=False
         )
         shap_values_df = shap_values_df[
-            shap_values_df["Features"] != "'loan_int_rate'"
+            shap_values_df["Features"] != "loan_int_rate"
         ]
         high_influence = shap_values_df.head(3)
         features = high_influence['Features'].tolist()  
@@ -339,9 +339,13 @@ def predict():
     cursor.execute(query, values) 
     db.commit()
 
+    print(features)
+    print(message)
+    print(len(features))
+    print(len(message))
     return render_template("index.html",prediction=result,person_name = person_name,probability = probability,features = features,scores=score * 100,message = message)
  
     
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+app.run(debug=True)
