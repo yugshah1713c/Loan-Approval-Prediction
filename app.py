@@ -278,14 +278,23 @@ def predict():
                 message.append(f"Your clean repayment history improved your loan approval chances.")
             
         elif f == "Education":
-            message.append(f"Your education level ({person_education}) was one of the factors considered by the model for this prediction.")
+            if s < 0:
+                 message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
+            else:
+                  message.append(f"Your education level ({person_education}) had a slight positive influence on this prediction.")
             
         elif f == "Ownership":
-           message.append(f"Your home ownership status ({person_home_ownership}) was one of the factors considered by the model for this prediction.")
+            if s < 0:
+                message.append(f"Your home ownership status ({person_home_ownership}) had a slight negative influence on this prediction.")
+            else:
+                message.append(f"Your home ownership status ({person_home_ownership}) had a slight positive influence on this prediction.")
                 
         elif f == "Intent":
-            message.append(f"The purpose of your loan ({loan_intent}) was one of the factors considered by the model for this prediction.")
-        
+   
+         if s < 0:
+            message.append(f"The purpose of your loan ({loan_intent}) had a slight negative influence on this prediction.")
+         else:
+            message.append(f"The purpose of your loan ({loan_intent}) had a slight positive influence on this prediction.")        
 
 
 
@@ -335,4 +344,4 @@ def predict():
     
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
