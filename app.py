@@ -178,6 +178,9 @@ def predict():
             by="abs",
             ascending=False
         )
+        shap_values_df = shap_values_df[
+            shap_values_df["Features"] != "'loan_int_rate'"
+        ]
         high_influence = shap_values_df.head(3)
         features = high_influence['Features'].tolist()
         score = high_influence['SHAP'].round(2).tolist()
@@ -195,6 +198,9 @@ def predict():
             by="abs",
             ascending=False
         )
+        shap_values_df = shap_values_df[
+            shap_values_df["Features"] != "'loan_int_rate'"
+        ]
         high_influence = shap_values_df.head(3)
         features = high_influence['Features'].tolist()  
         score = high_influence['SHAP'].round(2).tolist() 
@@ -209,26 +215,29 @@ def predict():
         'credit_score' : 'Credit Score',
         'previous_loan_defaults_on_file' : 'Previous Loan Defaults',
 
-        "person_education_Bachelor" : "Education (Bachelor's)",
-        "person_education_Master" : "Education (Master's)",
-        "person_education_Doctorate" : "Education (Doctorate)",
-        "person_education_High School" : "Education (High School)",
+        "person_education_Bachelor" : "Education",
+        "person_education_Master" : "Education",
+        "person_education_Doctorate" : "Education",
+        "person_education_High School" : "Education",
 
-        'person_home_ownership_OWN' : 'Ownership (Own)',
-        'person_home_ownership_RENT' : 'Ownership (Rent)',
-        'person_home_ownership_OTHER' : 'Ownership (Other)',
+        'person_home_ownership_OWN' : 'Ownership',
+        'person_home_ownership_RENT' : 'Ownership',
+        'person_home_ownership_OTHER' : 'Ownership',
 
-        'loan_intent_EDUCATION' : 'Intent (Education)',
-        'loan_intent_HOMEIMPROVEMENT' : 'Intent (Home Improvement)',
-        'loan_intent_MEDICAL' : 'Intent (Medical)',
-        'loan_intent_PERSONAL' : 'Intent (Personal)',
-        'loan_intent_VENTURE' : 'Intent (Venture)'
+        'loan_intent_EDUCATION' : 'Intent',
+        'loan_intent_HOMEIMPROVEMENT' : 'Intent',
+        'loan_intent_MEDICAL' : 'Intent',
+        'loan_intent_PERSONAL' : 'Intent',
+        'loan_intent_VENTURE' : 'Intent'
     }
-
+    print("Original Features:", features)
+    print("Scores:", score)
     features = [features_name[f] for f in features]
+    print("Mapped Features:", features)
     message = []
     
     for f,s in zip(features,score) :
+        print(f"{f} ---> {s}")
         if f == "Person Age" :
             if s < 0 :
                 message.append("Your age had a slight negative impact on this loan application.")
@@ -247,12 +256,6 @@ def predict():
             else :
                 message.append(f"Your requested loan amount is considered manageable based on your financial profile.")
         
-        elif f == "Interest Rate" :
-            if s < 0 :
-                message.append(f"Your interest rate of {interest_rate}%, had a negative impact on the approval decision.")
-            else :
-                message.append(f"Your interest rate of {interest_rate}%. supports a favorable approval decision.")
-
         elif f == "Loan-Income Ratio" :
             ratio = loan_amount / person_income * 100
             if s < 0 :
@@ -278,78 +281,25 @@ def predict():
             else :
                 message.append(f"Your clean repayment history improved your loan approval chances.")
             
-        elif f =="Education (Bachelor's)" :
-            if s < 0 :
-                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
-            else :
-                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
-
-        elif f =="Education (Master's)" :
-            if s < 0 :
-                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
-            else :
-                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
-
-        elif f =="Education (Doctorate)" :
-            if s < 0 :
-                message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
-            else :
-                message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
-
-        elif f =="Education (High School)" :
+        elif f =="Education" :
             if s < 0 :
                 message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
             else :
                 message.append(f"Your education level ({person_education}) contributed positively to this prediction.")
             
-        elif f == "Ownership (Own)" :
+        elif f == "Ownership" :
             if s < 0 :
                 message.append(f"Your home ownership status ({person_home_ownership}) slightly reduced your approval chances.")
             else :
                 message.append(f"Your home ownership status ({person_home_ownership}) contributed positively to your loan application.")
                 
-        elif f == "Ownership (Rent)" :
-            if s < 0 :
-                message.append(f"Your home ownership status ({person_home_ownership}) slightly reduced your approval chances.")
-            else :
-                message.append(f"Your home ownership status ({person_home_ownership}) contributed positively to your loan application.")
-
-
-        elif f == "Ownership (Other)" :
-            if s < 0 :
-                message.append(f"Your home ownership status ({person_home_ownership}) slightly reduced your approval chances.")
-            else :
-                message.append(f"Your home ownership status ({person_home_ownership}) contributed positively to your loan application.")
-
-        elif f == "Intent (Education)" :
+        elif f == "Intent" :
             if s < 0 :
                 message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
             else :
                 message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
         
-        elif f == "Intent (Home Improvement)" :
-            if s < 0 :
-                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
-            else :
-                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
 
-        elif f == "Intent (Medical)" :
-            if s < 0 :
-                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
-            else :
-                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
-
-        elif f == "Intent (Personal)" :
-            if s < 0 :
-                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
-            else :
-                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
-
-        elif f == "Intent (Venture)" :
-            if s < 0 :
-                message.append(f"The purpose of your loan ({loan_intent}) reduced your approval chances.")
-            else :
-                message.append(f"The purpose of your loan ({loan_intent}) aligns well with the model's approval criteria.")
 
 
 
@@ -393,7 +343,7 @@ def predict():
     cursor.execute(query, values)
     db.commit()
 
-    return render_template("index.html",prediction=result,person_name = person_name,probability = probability,features = features * 100,scores=score * 100,message = message)
+    return render_template("index.html",prediction=result,person_name = person_name,probability = probability,features = features,scores=score * 100,message = message)
 
     
 
