@@ -28,14 +28,23 @@ const button = document.querySelector("#predictionBtn")
 const btnText = document.querySelector("#btntext")
 const spinner = document.querySelector("#spinner")
 
+function markValid(el){
+    el.classList.remove("input-error")
+    el.classList.add("input-valid")
+}
+
+function markError(el){
+    el.classList.remove("input-valid")
+    el.classList.add("input-error")
+}
 
 age.addEventListener("input",  () => {
     if(age.value <18 || age.value > 100)
     {
-        age.style.border = "2px solid red";
+        markError(age);
         ageError.textContent = "❌ Age must be between 18 and 100.";
     }else{
-        age.style.border = "2px solid lightgreen";
+        markValid(age);
         ageError.textContent = "";  
     }
 });
@@ -45,10 +54,10 @@ name.addEventListener("input", () => {
     const nameLength = name.value.trim().length;
 
     if (nameLength < 3 || nameLength > 50) {
-        name.style.border = "2px solid red";
+        markError(name);
         nameError.textContent = "❌ Name must be 3–50 characters.";
     } else {
-        name.style.border = "2px solid lightgreen";
+        markValid(name);
         nameError.textContent = "";
     }
 
@@ -57,10 +66,10 @@ name.addEventListener("input", () => {
 income.addEventListener("input",() => {
     if(income.value <= 0)
     {
-        income.style.border = "2px solid red";
+        markError(income);
         incomeError.textContent = "❌ Income must be greater than 0."
     }else{
-        income.style.border = "2px solid lightgreen";
+        markValid(income);
         incomeError.textContent = ""
     }
 })
@@ -68,10 +77,10 @@ income.addEventListener("input",() => {
 loan_amt.addEventListener("input",() =>{
     if(loan_amt.value <= 0)
     {
-        loan_amt.style.border = "2px solid red";
+        markError(loan_amt);
         loan_amtError.textContent = "❌ Income must be greater than 0."
     }else{
-        loan_amt.style.border = "2px solid lightgreen";
+        markValid(loan_amt);
         loan_amtError.textContent = ""
     }
 })
@@ -79,20 +88,20 @@ loan_amt.addEventListener("input",() =>{
 int_rate.addEventListener("input",() => {
     if(int_rate.value <= 0 || int_rate.value > 50)
     {
-        int_rate.style.border = "2px solid red";
+        markError(int_rate);
         int_rateError.textContent = "❌ Interest rate must be between 0% and 50%."
     }else{
-        int_rate.style.border = "2px solid lightgreen";
+        markValid(int_rate);
         int_rateError.textContent = ""
     }
 })
 
 credit_history.addEventListener("input",() => {
     if(credit_history.value < 0){
-        credit_history.style.border = "2px solid red";
+        markError(credit_history);
         credit_historyError.textContent = "❌ Enter a valid credit history length."
     }else{
-        credit_history.style.border = "2px solid lightgreen";
+        markValid(credit_history);
         credit_historyError.textContent = ""
     }
 })
@@ -100,10 +109,10 @@ credit_history.addEventListener("input",() => {
 credit_score.addEventListener("input",() => {
     if(credit_score.value<300 || credit_score.value > 850)
     {
-        credit_score.style.border = "2px solid red";
+        markError(credit_score);
         credit_scoreError.textContent = "❌ Credit score must be between 300 and 850."
     }else{
-        credit_score.style.border = "2px solid lightgreen";
+        markValid(credit_score);
         credit_scoreError.textContent = ""
     }
 })
@@ -111,21 +120,21 @@ credit_score.addEventListener("input",() => {
 education.addEventListener("change",() => {
     if(education.value != "")
     {
-        education.style.border = "2px solid lightgreen"
+        markValid(education);
     }
 })
 
 ownership.addEventListener("change",() => {
     if(ownership.value != "")
     {
-        ownership.style.border = "2px solid lightgreen"
+        markValid(ownership);
     }
 })
 
 loan_intent.addEventListener("change",() => {
     if(loan_intent.value != "")
     {
-        loan_intent.style.border = "2px solid lightgreen"
+        markValid(loan_intent);
     }
 })
 
@@ -147,10 +156,6 @@ window.addEventListener("load",() => {
         predictionResult.scrollIntoView({
             behavior : "smooth",
             block : "start"
-        })
-        
-        setTimeout( () => {
-            predictionResult.classList.add("card-animate")
         })
     }
 })
