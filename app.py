@@ -29,8 +29,11 @@ explainer = shap.TreeExplainer(model)
 def home():
     return render_template("index.html")
 
-@app.route("/predict",methods = ['POST'])
+@app.route("/predict", methods=['GET', 'POST'])
 def predict():
+    if request.method == 'GET':
+        return render_template("predict.html")
+
     person_age = int(request.form['age'])
     person_name = request.form['person_name'].strip()
     person_income = float(request.form['income'])
@@ -44,72 +47,72 @@ def predict():
     person_home_ownership = request.form['home_ownership']
     loan_intent = request.form['loan_intent']
 
+    if person_income <= 0 :
+        return render_template(
+        "predict.html",
+        prediction = "❌ Income must be greater than 0."
+        )
     loan_percent_amount = loan_amount / person_income
     # ----------Validation----------
 
     if person_age < 18 or person_age > 100 :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Age must be between 18 and 100."
         )
     
     if len(person_name) < 3 or len(person_name) > 50:
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Name must be 3–50 characters."
         )
-    
-    if person_income <= 0 :
-        return render_template(
-            "index.html",
-            prediction = "❌ Income must be greater than 0."
-        )
+
     
     if loan_amount <= 0 :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Enter a valid loan amount."
         )
 
     if interest_rate < 0 or interest_rate > 50 :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Interest rate must be between 0% and 50%."
         )
     
     if credit_history <= 0 :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Enter a valid credit history length."
         )
     
     if credit_score < 300 or credit_score >850 :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Credit score must be between 300 and 850."
         )
     
     if person_education == "" :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Please select your education."
         )
     
     if person_home_ownership == "" :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Please select your ownership."
         )
     
     if loan_intent == "" :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction = "❌ Please select your loan intent."
         )
     
     if previous_loan_defaults not in ["Yes" , "No"] :
         return render_template(
-            "index.html",
+            "predict.html",
             prediction="❌ Please choose Yes or No."
         )
 
@@ -119,7 +122,7 @@ def predict():
     "person_income": person_income,
     "loan_amnt": loan_amount,
     "loan_int_rate": interest_rate,
-    "loan_percent_income": loan_amount / person_income,
+    "loan_percent_income": loan_percent_amount,
     "cb_person_cred_hist_length": credit_history,
     "credit_score": credit_score,
     "previous_loan_defaults_on_file": previous_loan_defaults,
@@ -236,65 +239,63 @@ def predict():
     for f,s in zip(features,score) :
         if f == "Person Age" :
             if s < 0 :
-                message.append("Your age had a slight negative impact on this loan application.")
+                message.append("For this prediction your age reduces the model's confidence in approval.")
             else :
-                message.append("Your age falls within a favorable range for this loan application.t")
+                message.append("For this prediction your age increases the model's confidence in approval.")
             
         elif f == "Person Income":
             if s < 0 :
-                message.append(f"Your annual income of ₹{person_income} is lower than ideal, which reduced your approval chances.")
+                message.append(f"For this prediction your annual income of ₹{person_income} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"Your annual income of ₹{person_income} strengthens your loan approval chances.")
+                message.append(f"Your annual income of ₹{person_income} ,increases the model's confidence in approval.")
             
         elif f == "Loan Amount" :
             if s < 0 :
-                message.append(f"Your requested loan amount is relatively high, which reduced your approval chances.")
+                message.append(f"For this prediction your loan amount of ₹{loan_amount} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"Your requested loan amount is considered manageable based on your financial profile.")
+                message.append(f"For this prediction your loan amount of ₹{loan_amount} ,increases the model's confidence in approval.")
         
-        elif f == "Loan-Income Ratio" :
-            ratio = loan_amount / person_income * 100
-            if s < 0 :
-                message.append(f"Your requested loan is {loan_percent_amount}% of your annual income, indicating a high repayment burden.")
-            else :
-                message.append(f"Your requested loan is only {loan_percent_amount}% of your annual income, indicating a healthy repayment capacity.")
+        elif f == "Loan-Income Ratio":
+            if s < 0:
+              message.append(f"For this prediction your loan income ration  of ₹{loan_percent_amount} ,reduces the model's confidence in approval.")
+            else:
+                message.append(f"For this prediction your loan income ratio of ₹{loan_percent_amount} ,increases the model's confidence in approval.")
 
         elif f == "Credit History" :
             if s < 0 :
-                message.append(f"Your credit history of {credit_history} years is relatively short, which reduced your approval chances.")
+                message.append(f"For this prediction your credit history of ₹{credit_history} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"Your credit history of {credit_history} years demonstrates stable borrowing experience.")
+                message.append(f"For this prediction your credit history of ₹{credit_history} ,increases the model's confidence in approval.")
 
         elif f == "Credit Score" :
             if s < 0 :
-                message.append(f"Your credit score of {credit_score} reduced your approval chances.")
+                message.append(f"For this prediction your credit score of ₹{credit_score} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"Your credit score of {credit_score} significantly improved your approval chances.")
+                message.append(f"For this prediction your credit score of ₹{credit_score} ,increases the model's confidence in approval.")
 
         elif f == "Previous Loan Defaults" :
             if s < 0 :
-                message.append(f"Your previous loan default history significantly reduced your approval chances.")
+                message.append(f"For this prediction your previous loan defaults of ₹{previous_loan_defaults} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"Your clean repayment history improved your loan approval chances.")
+                message.append(f"For this prediction your previous loan defaults of ₹{previous_loan_defaults} ,increases the model's confidence in approval.")
             
         elif f == "Education":
             if s < 0:
-                 message.append(f"Your education level ({person_education}) had a slight negative influence on this prediction.")
+                 message.append(f"For this prediction your education is ₹({person_education}) ,which reduces the model's confidence in approval.")
             else:
-                  message.append(f"Your education level ({person_education}) had a slight positive influence on this prediction.")
+                  message.append(f"For this prediction your education is ₹({person_education}) ,which increases the model's confidence in approval.")
             
         elif f == "Ownership":
             if s < 0:
-                message.append(f"Your home ownership status ({person_home_ownership}) had a slight negative influence on this prediction.")
+                message.append(f"For this prediction your home ownership is ₹({person_home_ownership}) ,which reduces the model's confidence in approval.")
             else:
-                message.append(f"Your home ownership status ({person_home_ownership}) had a slight positive influence on this prediction.")
+                message.append(f"For this prediction your home ownership is ₹({person_home_ownership}) ,which increases the model's confidence in approval.")
                 
         elif f == "Intent":
-   
          if s < 0:
-            message.append(f"The purpose of your loan ({loan_intent}) had a slight negative influence on this prediction.")
+            message.append(f"For this prediction your loan intent is ₹({loan_intent}) ,which reduces the model's confidence in approval.")
          else:
-            message.append(f"The purpose of your loan ({loan_intent}) had a slight positive influence on this prediction.")        
+            message.append(f"For this prediction your loan intent is ₹({loan_intent}) ,which increases the model's confidence in approval.")        
 
 
 
@@ -329,7 +330,7 @@ def predict():
     loan_percent_amount,
     credit_history,
     credit_score,
-    "Yes" if previous_loan_defaults == 1 else "No",
+    previous_loan_defaults,
     person_education,
     person_home_ownership,
     loan_intent,
@@ -343,7 +344,7 @@ def predict():
     print(message)
     print(len(features))
     print(len(message))
-    return render_template("index.html",prediction=result,person_name = person_name,probability = probability,features = features,scores=score * 100,message = message)
+    return render_template("predict.html",prediction=result,person_name = person_name,probability = probability,features = features,message = message)
  
     
 

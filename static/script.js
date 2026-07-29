@@ -159,3 +159,25 @@ window.addEventListener("load",() => {
         })
     }
 })
+
+// ---------------- Reveal reasons on the prediction page ----------------
+
+const toggleReasonsBtn = document.querySelector("#toggleReasons")
+const reasonsPanel = document.querySelector("#reasonsPanel")
+const reasonBtnText = document.querySelector("#reasonBtnText")
+
+if(toggleReasonsBtn && reasonsPanel){
+    toggleReasonsBtn.addEventListener("click", () => {
+        const isHidden = reasonsPanel.hasAttribute("hidden")
+
+        if(isHidden){
+            reasonsPanel.removeAttribute("hidden")
+            toggleReasonsBtn.classList.add("open")
+            reasonBtnText.textContent = "Hide Reasons"
+        } else {
+            reasonsPanel.setAttribute("hidden", "")
+            toggleReasonsBtn.classList.remove("open")
+            reasonBtnText.textContent = "View Reasons"
+        }
+    })
+}

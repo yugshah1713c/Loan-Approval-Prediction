@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Approval Prediction</title>
+    <title>Synapse Loans — AI Loan Approval Prediction</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -22,30 +22,32 @@
             Synapse<span class="logo-accent">Loans</span>
         </div>
         <div class="nav-links">
-            <a href="#form-section">Predict</a>
             <a href="#trust">How it works</a>
+            <a href="{{ url_for('predict') }}">Predict</a>
         </div>
-        <a href="#form-section" class="nav-cta">Apply Now</a>
+        <a href="{{ url_for('predict') }}" class="nav-cta">Apply Now</a>
     </nav>
 
     <section class="hero">
         <span class="eyebrow">AI Loan Underwriting</span>
         <h1 class="hero-title">Know your loan <span class="shimmer">outcome</span></h1>
-        <p class="hero-subtext">Fill in your details below and get an instant, data-driven prediction on your loan approval.</p>
+        <p class="hero-subtext">Get an instant, data-driven prediction on your loan approval — backed by a model
+            trained on real lending data, with plain-English reasons behind every decision.</p>
+
+        <!-- <a href="{{ url_for('predict') }}" class="hero-cta">
+            Get Your Prediction
+            <span class="hero-cta-arrow">→</span> -->
+        </a>
     </section>
 
     <div class="ticker-wrap">
         <div class="ticker-track">
-            <div class="ticker-item"><span class="ticker-label">Approval Rate</span><span class="ticker-value emerald">71.4%</span></div>
             <div class="ticker-item"><span class="ticker-label">Avg. Decision Time</span><span class="ticker-value cyan">&lt; 1s</span></div>
-            <div class="ticker-item"><span class="ticker-label">Model Accuracy</span><span class="ticker-value violet">94.2%</span></div>
-            <div class="ticker-item"><span class="ticker-label">Applications Scored</span><span class="ticker-value">128,904</span></div>
-            <div class="ticker-item"><span class="ticker-label">Avg. Credit Score</span><span class="ticker-value">702</span></div>
-            <div class="ticker-item"><span class="ticker-label">Approval Rate</span><span class="ticker-value emerald">71.4%</span></div>
+            <div class="ticker-item"><span class="ticker-label">Model Accuracy</span><span class="ticker-value violet">93%</span></div>
             <div class="ticker-item"><span class="ticker-label">Avg. Decision Time</span><span class="ticker-value cyan">&lt; 1s</span></div>
-            <div class="ticker-item"><span class="ticker-label">Model Accuracy</span><span class="ticker-value violet">94.2%</span></div>
-            <div class="ticker-item"><span class="ticker-label">Applications Scored</span><span class="ticker-value">128,904</span></div>
-            <div class="ticker-item"><span class="ticker-label">Avg. Credit Score</span><span class="ticker-value">702</span></div>
+            <div class="ticker-item"><span class="ticker-label">Model Accuracy</span><span class="ticker-value violet">93%</span></div>
+            <div class="ticker-item"><span class="ticker-label">Avg. Decision Time</span><span class="ticker-value cyan">&lt; 1s</span></div>
+            <div class="ticker-item"><span class="ticker-label">Model Accuracy</span><span class="ticker-value violet">93%</span></div>
         </div>
     </div>
 
@@ -67,228 +69,14 @@
         </div>
     </section>
 
-    <div class="container" id="form-section">
-
-        <div class="card">
-
-            <div class="title">
-                <h1>🏦 Loan Approval Prediction</h1>
-                <p>Fill in the details below to predict loan approval.</p>
-            </div>
-
-            <form action="/predict" method="POST" id="pred-form">
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                          Age
-                          <span style="color:#06B6D4; cursor:pointer;"
-                            title="Enter your current age in years.">ⓘ</span>
-                    </label>
-                     <input type="number" name="age" id="age">
-                     <small id="ageError" style="color: red;"></small>
-                </div>
-
-                <div class="input-box">
-                        <label style="display:flex; align-items:center; gap:5px;">
-                            Name
-                            <span style="color:#06B6D4; cursor:pointer;"
-                            title="Enter your full name.">ⓘ</span>
-                         </label>
-                        <input type="text" name="person_name" id="name" spellcheck="false" min="3" required>
-                        <small id="nameError"></small>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Annual Income
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Enter your yearly income before taxes.">ⓘ</span>
-                    </label>
-                    <input type="number" name="income" min="0" id="income" required>
-                    <small id="incomeError"></small>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Loan Amount
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Enter the total amount of loan you want.">ⓘ</span>
-                    </label>
-                    <input type="number" name="Loan_amount" min="0" id="loan_amt" required>
-                    <small id="loan_amtError"></small>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Interest Rate (%)
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Annual interest rate offered for the loan.">ⓘ</span>
-                    </label>
-                    <input type="number" name="int_rate" step="any" min="0" id="int_rate" max="50" required>
-                    <small id="int_rateError"></small>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Credit History Length
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Number of years since your first credit account was opened.">ⓘ</span>
-                    </label>
-                    <input type="number" name="person_cred_hist_length" id="credit_history" min="0" required>
-                    <small id="credit_historyError"></small>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Credit Score
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Usually between 300 and 850. Higher scores improve approval chances.">ⓘ</span>
-                    </label>
-                    <input type="number" name="credit_score"  id="credit_score" required>
-                    <small id="credit_scoreError"></small>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Education
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Select your highest completed education level.">ⓘ</span>
-                    </label>
-                    <select name="person_education" id="education" required>
-                        <option value="" selected disabled>Select Education</option>
-                        <option value="Associate">Associate</option>
-                        <option value="Bachelor">Bachelor</option>
-                        <option value="Doctorate">Doctorate</option>
-                        <option value="High School">High School</option>
-                        <option value="Master">Master</option>
-                    </select>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Home Ownership
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Choose whether you own, rent, or have a mortgage.">ⓘ</span>
-                    </label>
-
-                    <select name="home_ownership" id="ownership" required>
-                        <option value="" selected disabled>Select Ownership</option>
-                        <option value="OWN">Own</option>
-                        <option value="RENT">Rent</option>
-                        <option value="MORTGAGE">Mortgage</option>
-                        <option value="OTHER">Other</option>
-                    </select>
-                </div>
-
-                <div class="input-box">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Loan Purpose
-                        <span style="color:#06B6D4; cursor:pointer;"
-                            title="Select the main reason for applying for the loan.">ⓘ</span>
-                    </label>
-
-                    <select name="loan_intent" id="loan_intent" required>
-                        <option value="" selected disabled>Select Loan Intent</option>
-                        <option value="EDUCATION">Education</option>
-                        <option value="HOMEIMPROVEMENT">Home Improvement</option>
-                        <option value="MEDICAL">Medical</option>
-                        <option value="PERSONAL">Personal</option>
-                        <option value="VENTURE">Venture</option>
-                        <option value="DEBTCONSOLIDATION">Debt Consolidation</option>
-                    </select>
-                </div>
-
-<div class="input-box">
-
-    <label style="display:flex; align-items:center; gap:5px;">
-        Previous Loan Defaults
-        <span style="color:#06B6D4; cursor:pointer;"
-              title="Choose 'Yes' if you have previously failed to repay a loan.">
-            ⓘ
-        </span>
-    </label>
-
-    <div class="radio-group">
-
-        <label class="radio-option">
-            <input type="radio"
-                   name="previous_loan_defaults"
-                   value="Yes"
-                   required>
-            Yes
-        </label>
-
-        <label class="radio-option">
-            <input type="radio"
-                   name="previous_loan_defaults"
-                   value="No">
-            No
-        </label>
-
-    </div>
-
-
-</div>
-
-                <div class="buttons">
-
-                    <button class="predict-btn" type="submit" id="predictionBtn">
-                        <span>
-                            <span id="btntext">Predict Loan Status</span>
-                            <span id="spinner" class="spin-hidden">⌛</span>
-                        </span>
-                    </button>
-
-                    <button class="reset-btn" type="reset">
-                        Reset
-                    </button>
-
-                </div>
-
-            </form>
-
-<!-- ------------------------Prediction--------------------- -->
-
-            <div class="prediction-box">
-
-                <h2>Prediction Result</h2>
-
-                {% if prediction %}
-                    <div class="prediction-result {{ 'approved' if prediction == 'Loan Approved ✅' else 'rejected' }} card-animate" id="prediction_result">
-                        {% if prediction == "Loan Approved ✅" %}
-                        <h3>Loan Approved ✅</h3>
-                        <p>🎉🎊Crongratulations {{person_name}}</p>
-                        <p>Approval chances {{probability}}%</p>
-                        <p>Key factors that strengthened your approval:</p>
-                        <br>
-                        <p>{{features[0]}} : {{message[0]}}</p>
-                        <br>
-                        <p>{{features[1]}} : {{message[1]}}</p>
-                        <br>
-                        <p>{{features[2]}} : {{message[2]}}</p>
-                        
-                    
-                        {% else %}
-                        <h3>Loan Rejected ❌</h3>
-                        <p>😕Sorry {{person_name}}</p>
-                        <p>Approval chances {{probability}}%</p>
-                        <p>Key factors that affected your loan application:</p>
-                        <br>
-                        <p>{{features[0]}} : {{message[0]}}</p>
-                        <br>
-                        <p>{{features[1]}} : {{message[1]}}</p>
-                        <br>
-                        <p>{{features[2]}} : {{message[2]}}</p>
-                        {% endif %}
-                    </div>
-                {% endif %}
-
-            </div>
-
-
-        </div>
-
-    </div>
+    <section class="final-cta">
+        <h2>Ready to see where you stand?</h2>
+        <p>It takes less than a minute to fill in your details, and you'll get your result — along with the key
+            factors behind it — right away.</p>
+        <a href="{{ url_for('predict') }}" class="final-cta-btn">
+            <span>Get Your Prediction</span>
+        </a>
+    </section>
 
     <footer>
         <div class="footer-logo">Synapse<span>Loans</span></div>
@@ -298,7 +86,6 @@
         </div>
     </footer>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>
