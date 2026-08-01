@@ -26,6 +26,7 @@ An end-to-end Machine Learning project that predicts loan approval outcomes base
 - SHAP Explainability integrated into the web application
 - Flask Web Application
 - Live Deployment on Render
+- MySQL database integration for storing user submissions and prediction results
 
 ## 🚀 Project Highlights
 
@@ -38,6 +39,7 @@ An end-to-end Machine Learning project that predicts loan approval outcomes base
 - 📈 HistGradientBoosting Experiment
 - 🔍 SHAP Explainability
 - 🌐 Flask Web Application
+- 🗄️ MySQL Database Integration
 
 ## 🛠️ Tech Stack
 
@@ -52,6 +54,7 @@ An end-to-end Machine Learning project that predicts loan approval outcomes base
 | Deployment | Render |
 | Model Serialization | Joblib |
 | Version Control | Git & GitHub |
+| Database | MySQL |
 
 ## 📑 Table of Contents
 
@@ -158,6 +161,9 @@ The project follows a structured end-to-end machine learning workflow:
 
 9. **Deployment**
     - Built a Flask web application for interactive loan approval prediction
+
+10. **Database Integration**
+   - Stored user-submitted application details and model prediction results in a MySQL database.
 
 ## 📁 Project Structure
 
@@ -334,6 +340,18 @@ The application allows users to:
 - Predict loan approval status.
 - View SHAP-based explanations for each prediction.
 - Experience the same preprocessing pipeline used during model training.
+
+## 🗄️ Database Integration
+
+The Flask application is integrated with a MySQL database to maintain a record of user interactions.
+
+After a user submits the loan application form:
+
+1. The input data is validated and preprocessed.
+2. The trained Random Forest model generates a loan approval prediction.
+3. Both the applicant's submitted information and the prediction result are stored in a MySQL database.
+
+This integration demonstrates how machine learning models can be combined with a relational database to build a complete end-to-end application, enabling prediction history, auditing, and future analysis.
 
 ### Deployment Note
 
