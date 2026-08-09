@@ -257,45 +257,45 @@ def predict():
         
         elif f == "Loan-Income Ratio":
             if s < 0:
-              message.append(f"For this prediction your loan income ration  of ₹{loan_percent_amount} ,reduces the model's confidence in approval.")
+              message.append(f"For this prediction your loan income ration  of {loan_percent_amount} ,reduces the model's confidence in approval.")
             else:
-                message.append(f"For this prediction your loan income ratio of ₹{loan_percent_amount} ,increases the model's confidence in approval.")
+                message.append(f"For this prediction your loan income ratio of {loan_percent_amount} ,increases the model's confidence in approval.")
 
         elif f == "Credit History" :
             if s < 0 :
-                message.append(f"For this prediction your credit history of ₹{credit_history} ,reduces the model's confidence in approval.")
+                message.append(f"For this prediction your credit history of {credit_history} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"For this prediction your credit history of ₹{credit_history} ,increases the model's confidence in approval.")
+                message.append(f"For this prediction your credit history of {credit_history} ,increases the model's confidence in approval.")
 
         elif f == "Credit Score" :
             if s < 0 :
-                message.append(f"For this prediction your credit score of ₹{credit_score} ,reduces the model's confidence in approval.")
+                message.append(f"For this prediction your credit score of {credit_score} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"For this prediction your credit score of ₹{credit_score} ,increases the model's confidence in approval.")
+                message.append(f"For this prediction your credit score of {credit_score} ,increases the model's confidence in approval.")
 
         elif f == "Previous Loan Defaults" :
             if s < 0 :
-                message.append(f"For this prediction your previous loan defaults of ₹{previous_loan_defaults} ,reduces the model's confidence in approval.")
+                message.append(f"For this prediction your previous loan defaults of {previous_loan_defaults} ,reduces the model's confidence in approval.")
             else :
-                message.append(f"For this prediction your previous loan defaults of ₹{previous_loan_defaults} ,increases the model's confidence in approval.")
+                message.append(f"For this prediction your previous loan defaults of {previous_loan_defaults} ,increases the model's confidence in approval.")
             
         elif f == "Education":
             if s < 0:
-                 message.append(f"For this prediction your education is ₹({person_education}) ,which reduces the model's confidence in approval.")
+                 message.append(f"For this prediction your education is ({person_education}) ,which reduces the model's confidence in approval.")
             else:
-                  message.append(f"For this prediction your education is ₹({person_education}) ,which increases the model's confidence in approval.")
+                  message.append(f"For this prediction your education is ({person_education}) ,which increases the model's confidence in approval.")
             
         elif f == "Ownership":
             if s < 0:
-                message.append(f"For this prediction your home ownership is ₹({person_home_ownership}) ,which reduces the model's confidence in approval.")
+                message.append(f"For this prediction your home ownership is ({person_home_ownership}) ,which reduces the model's confidence in approval.")
             else:
-                message.append(f"For this prediction your home ownership is ₹({person_home_ownership}) ,which increases the model's confidence in approval.")
+                message.append(f"For this prediction your home ownership is ({person_home_ownership}) ,which increases the model's confidence in approval.")
                 
         elif f == "Intent":
          if s < 0:
-            message.append(f"For this prediction your loan intent is ₹({loan_intent}) ,which reduces the model's confidence in approval.")
+            message.append(f"For this prediction your loan intent is ({loan_intent}) ,which reduces the model's confidence in approval.")
          else:
-            message.append(f"For this prediction your loan intent is ₹({loan_intent}) ,which increases the model's confidence in approval.")        
+            message.append(f"For this prediction your loan intent is ({loan_intent}) ,which increases the model's confidence in approval.")        
 
 
 
