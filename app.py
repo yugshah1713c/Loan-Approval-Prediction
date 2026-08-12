@@ -10,14 +10,18 @@ app = Flask(__name__)
 load_dotenv()
 
 ## Database connection
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CA_PATH = os.path.join(BASE_DIR, "aiven-ca.pem")
+
 db = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
     database=os.getenv("DB_NAME"),
-    port=int(os.getenv("DB_PORT"))
+    port=int(os.getenv("DB_PORT")),
+    ssl_ca=CA_PATH,
+    ssl_verify_cert=True
 )
-
 cursor = db.cursor()
 
 model = joblib.load("models/random_forest.pkl")
